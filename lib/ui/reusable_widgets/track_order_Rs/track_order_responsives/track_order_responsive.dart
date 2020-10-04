@@ -21,7 +21,7 @@ class Responsives {
 
   static void makeFlexible(BuildContext context) {
     var deviceWidth = MediaQuery.of(context).size.shortestSide;
-    if (deviceWidth <= 320) {
+    if (deviceWidth <= 480) {
       iconContainerWidth = 60;
       iconSize = 40;
 
