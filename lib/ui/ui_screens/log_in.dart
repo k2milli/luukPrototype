@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter/gestures.dart';
-import 'package:luuk/reusable_widgets/login_form.dart';
+import './../reusable_widgets/login_form.dart';
 
 class LogIn extends StatefulWidget {
   @override
@@ -12,7 +12,6 @@ class _LogInState extends State<LogIn> {
 
   @override
   Widget build(BuildContext context) {
-
     double width = MediaQuery.of(context).size.width;
     double height = MediaQuery.of(context).size.height;
 
@@ -48,16 +47,15 @@ class _LogInState extends State<LogIn> {
                         text: TextSpan(
                           text: 'l',
                           style: TextStyle(
-                            fontFamily: 'Grandstander',
-                            fontSize: 58,
-                            color: Colors.blueAccent[100]
-                          ),
+                              fontFamily: 'Grandstander',
+                              fontSize: 58,
+                              color: Colors.blueAccent[100]),
                           children: <TextSpan>[
                             TextSpan(
                                 text: 'uu',
                                 style: TextStyle(
-                                    color: Colors.black,
-                                    )),
+                                  color: Colors.black,
+                                )),
                             TextSpan(
                                 text: 'k',
                                 style: TextStyle(
@@ -80,8 +78,8 @@ class _LogInState extends State<LogIn> {
                               _formKey.currentState.save();
                             }
                           },
-                          child:
-                          Text('Log In', style: TextStyle(color: Colors.white)),
+                          child: Text('Log In',
+                              style: TextStyle(color: Colors.white)),
                         ),
                       ),
                       RichText(
@@ -113,35 +111,37 @@ class _LogInState extends State<LogIn> {
                           fontWeight: FontWeight.bold,
                         ),
                       ),
-                      Row(mainAxisAlignment: MainAxisAlignment.center, children: [
-                        Padding(
-                          padding: EdgeInsets.all(5),
-                          child: Image.network(
-                              'https://www.facebook.com/images/fb_icon_325x325.png',
-                              height: 25,
-                              width: 25),
-                        ),
-                        RichText(
-                          text: TextSpan(
-                            text: 'Login as ',
-                            style: TextStyle(
-                                fontSize: 16,
-                                color: Colors.blueAccent[200],
-                                fontWeight: FontWeight.w400),
-                            children: <TextSpan>[
-                              TextSpan(
-                                  text: '@SarahStylish_za',
-                                  recognizer: TapGestureRecognizer()
-                                    ..onTap = () {
-                                      // single tapped
-                                    },
-                                  style: TextStyle(
-                                      color: Colors.blueAccent,
-                                      fontWeight: FontWeight.bold)),
-                            ],
-                          ),
-                        ),
-                      ]),
+                      Row(
+                          mainAxisAlignment: MainAxisAlignment.center,
+                          children: [
+                            Padding(
+                              padding: EdgeInsets.all(5),
+                              child: Image.network(
+                                  'https://www.facebook.com/images/fb_icon_325x325.png',
+                                  height: 25,
+                                  width: 25),
+                            ),
+                            RichText(
+                              text: TextSpan(
+                                text: 'Login as ',
+                                style: TextStyle(
+                                    fontSize: 16,
+                                    color: Colors.blueAccent[200],
+                                    fontWeight: FontWeight.w400),
+                                children: <TextSpan>[
+                                  TextSpan(
+                                      text: '@SarahStylish_za',
+                                      recognizer: TapGestureRecognizer()
+                                        ..onTap = () {
+                                          // single tapped
+                                        },
+                                      style: TextStyle(
+                                          color: Colors.blueAccent,
+                                          fontWeight: FontWeight.bold)),
+                                ],
+                              ),
+                            ),
+                          ]),
                     ]),
               ),
             ),
@@ -191,28 +191,25 @@ class _LogInState extends State<LogIn> {
   Widget email(double width) => LogInForm(
       width: width,
       hintText: "username, email or Phone number",
-      onSubmit: (String value){
+      onSubmit: (String value) {
         print(value);
       },
-      onValidator: (String value){
-        return
-          RegExp(r"^[a-zA-Z0-9.a-zA-Z0-9.!#$%&'*+-/=?^_`{|}~]+@[a-zA-Z0-9]+\.[a-zA-Z]+").hasMatch(value) ?
-          null : 'Enter valid EmailAddress';
-      }
-  );
+      onValidator: (String value) {
+        return RegExp(
+                    r"^[a-zA-Z0-9.a-zA-Z0-9.!#$%&'*+-/=?^_`{|}~]+@[a-zA-Z0-9]+\.[a-zA-Z]+")
+                .hasMatch(value)
+            ? null
+            : 'Enter valid EmailAddress';
+      });
 
   Widget password(double width) => LogInForm(
-      width: width,
-      hintText: "password",
-      onSubmit: (String value){
-        print(value);
-      },
-      onValidator:  (String value){
-        return value.length > 8
-            ? null
-            : 'Password must contain 8 characters';
-      },
-    );
-
+        width: width,
+        hintText: "password",
+        onSubmit: (String value) {
+          print(value);
+        },
+        onValidator: (String value) {
+          return value.length > 8 ? null : 'Password must contain 8 characters';
+        },
+      );
 }
-

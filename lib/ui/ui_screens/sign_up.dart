@@ -156,10 +156,9 @@ class _SignUpState extends State<SignUp> {
 }
 
 class Field extends StatelessWidget {
-  @override
   final value;
   Field({this.value});
-
+  @override
   Widget build(BuildContext context) {
     return Align(
       child: SizedBox(

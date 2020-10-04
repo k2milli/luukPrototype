@@ -63,7 +63,6 @@ flutter:
   # list giving the asset and other descriptors for the font. For
   # example:
   fonts:
-<<<<<<< HEAD
     - family: OpenSans
       fonts:
         - asset: fonts/OpenSans-Regular.ttf
@@ -73,7 +72,7 @@ flutter:
     - family: Citrica
       fonts:
         - asset: fonts/Citrica-Regular.ttf
-=======
+# =======
     - family: Grandstander
       fonts:
         - asset: assets/Grandstander-SemiBold.ttf
@@ -84,7 +83,6 @@ flutter:
   #       - asset: fonts/TrajanPro.ttf
   #       - asset: fonts/TrajanPro_Bold.ttf
   #         weight: 700
->>>>>>> 6ffd399077617e21bf7e933ddec1b5fec59b20ef
   #
   # For details regarding fonts from package dependencies,
   # see https://flutter.dev/custom-fonts/#from-packages
