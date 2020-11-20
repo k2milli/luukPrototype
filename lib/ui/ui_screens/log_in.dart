@@ -1,5 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter/gestures.dart';
+import 'package:luuk/repository/firebase_auth_repository.dart';
+import 'package:provider/provider.dart';
 import './../reusable_widgets/login_form.dart';
 
 class LogIn extends StatefulWidget {
@@ -9,11 +11,20 @@ class LogIn extends StatefulWidget {
 
 class _LogInState extends State<LogIn> {
   final _formKey = GlobalKey<FormState>();
+  TextEditingController _emailEditingController;
+  TextEditingController _passwordEditingController;
+  @override
+  void initState() {
+    super.initState();
+    _emailEditingController = TextEditingController();
+    _passwordEditingController = TextEditingController();
+  }
 
   @override
   Widget build(BuildContext context) {
     double width = MediaQuery.of(context).size.width;
     double height = MediaQuery.of(context).size.height;
+    var _auth = Provider.of<FirebaseAuthRepository>(context);
 
     return SafeArea(
       child: Scaffold(
@@ -65,8 +76,8 @@ class _LogInState extends State<LogIn> {
                         ),
                       ),
                       SizedBox(height: 15),
-                      email(width),
-                      password(width),
+                      email(width, _emailEditingController),
+                      password(width, _passwordEditingController),
                       ButtonTheme(
                         minWidth: width * 0.75,
                         height: height * 0.08,
@@ -75,7 +86,12 @@ class _LogInState extends State<LogIn> {
                           color: Color(0xFF110C11),
                           onPressed: () {
                             if (_formKey.currentState.validate()) {
-                              _formKey.currentState.save();
+                              // _formKey.currentState.save();
+                              _auth
+                                  .signInUser(
+                                      email: _emailEditingController.text,
+                                      password: _passwordEditingController.text)
+                                  .then((value) => print(value.user.email));
                             }
                           },
                           child: Text('Log In',
@@ -188,7 +204,8 @@ class _LogInState extends State<LogIn> {
     );
   }
 
-  Widget email(double width) => LogInForm(
+  Widget email(double width, TextEditingController controller) => LogInForm(
+      controller: controller,
       width: width,
       hintText: "username, email or Phone number",
       onSubmit: (String value) {
@@ -202,7 +219,9 @@ class _LogInState extends State<LogIn> {
             : 'Enter valid EmailAddress';
       });
 
-  Widget password(double width) => LogInForm(
+  Widget password(double width, TextEditingController controller) => LogInForm(
+        isPassword: true,
+        controller: controller,
         width: width,
         hintText: "password",
         onSubmit: (String value) {

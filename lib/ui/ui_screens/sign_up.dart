@@ -1,19 +1,31 @@
 import 'package:flutter/material.dart';
 import 'package:fluttericon/entypo_icons.dart';
 import 'package:flutter_auth_buttons/flutter_auth_buttons.dart';
+import 'package:luuk/repository/firebase_auth_repository.dart';
+import 'package:provider/provider.dart';
 
 class SignUp extends StatefulWidget {
   @override
   _SignUpState createState() => _SignUpState();
 }
 
+extension on String {
+  num toIntFromString() {
+    return int.parse(this);
+  }
+}
+
 class _SignUpState extends State<SignUp> {
   final _formKey = GlobalKey<FormState>();
   final TextEditingController _pass = TextEditingController();
   final TextEditingController _confirmPass = TextEditingController();
+  final TextEditingController _emailController = TextEditingController();
+  final TextEditingController _fullNameController = TextEditingController();
+  final TextEditingController _phoneNumberController = TextEditingController();
 
   @override
   Widget build(BuildContext context) {
+    var _auth = Provider.of<FirebaseAuthRepository>(context);
     return Scaffold(
       resizeToAvoidBottomPadding:
           false, // prevents overflow (resize the widgets)
@@ -48,15 +60,20 @@ class _SignUpState extends State<SignUp> {
             key: _formKey,
             child: Column(
               children: [
-                Field(value: "Name and Surname*"),
+                Field(
+                    value: "Name and Surname*",
+                    controller: _fullNameController),
                 SizedBox(
                   height: 10,
                 ),
-                Field(value: "Phone Number*"),
+                Field(
+                    value: "Phone Number*",
+                    keyboardType: TextInputType.phone,
+                    controller: _phoneNumberController),
                 SizedBox(
                   height: 10,
                 ),
-                Field(value: "Email Address*"),
+                Field(value: "Email Address*", controller: _emailController),
                 SizedBox(
                   height: 10,
                 ),
@@ -76,7 +93,14 @@ class _SignUpState extends State<SignUp> {
             child: RaisedButton(
               onPressed: () {
                 if (_formKey.currentState.validate()) {
-                  print("Account Created");
+                  _auth
+                      .registerAndSaveCreds(
+                          email: _emailController.text,
+                          fullName: _fullNameController.text,
+                          password: _confirmPass.text,
+                          phoneNumber:
+                              int.tryParse(_phoneNumberController.text))
+                      .then((value) => print("Done"));
                 }
               },
               color: Colors.black,
@@ -112,7 +136,8 @@ class _SignUpState extends State<SignUp> {
             width: (MediaQuery.of(context).size.width / 100) * 70,
             child: GoogleSignInButton(
               onPressed: () {
-                print("Hello Google");
+                _auth.googleSignIn(
+                    phoneNumber: _phoneNumberController.text.toIntFromString());
               },
               darkMode: true,
               textStyle: TextStyle(
@@ -137,6 +162,7 @@ class _SignUpState extends State<SignUp> {
               GestureDetector(
                 onTap: () {
                   print("Log In");
+                  _auth.signOut().then((value) => print("name"));
                 },
                 child: Text(
                   "Log In.",
@@ -157,7 +183,12 @@ class _SignUpState extends State<SignUp> {
 
 class Field extends StatelessWidget {
   final value;
-  Field({this.value});
+  final TextInputType keyboardType;
+  final TextEditingController controller;
+  Field(
+      {this.value,
+      this.keyboardType = TextInputType.emailAddress,
+      @required this.controller});
   @override
   Widget build(BuildContext context) {
     return Align(
@@ -167,6 +198,8 @@ class Field extends StatelessWidget {
           color: Colors.grey[200],
           child: TextFormField(
             // autofocus: true,
+            controller: controller,
+            keyboardType: keyboardType,
             decoration: InputDecoration(
               hintText: value,
               contentPadding: EdgeInsets.all(5),
@@ -186,8 +219,8 @@ class Field extends StatelessWidget {
 }
 
 class FieldTwo extends StatelessWidget {
-  @override
   final value, controller;
+  @override
   FieldTwo({this.value, this.controller});
 
   Widget build(BuildContext context) {
@@ -218,8 +251,8 @@ class FieldTwo extends StatelessWidget {
 }
 
 class FieldThree extends StatelessWidget {
-  @override
   final value, controllerone, controllertwo;
+  @override
   FieldThree({this.value, this.controllerone, this.controllertwo});
 
   Widget build(BuildContext context) {

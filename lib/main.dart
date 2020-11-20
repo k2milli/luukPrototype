@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:luuk/ui/ui_screens/sign_up.dart';
 import './ui/ui_screens/track_order_page.dart';
 
 void main() {
@@ -29,7 +30,7 @@ class MyApp extends StatelessWidget {
         // closer together (more dense) than on mobile platforms.
         visualDensity: VisualDensity.adaptivePlatformDensity,
       ),
-      home: TrackOrder(),
+      home: SignUp(),
     );
   }
 }

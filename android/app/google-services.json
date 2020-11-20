@@ -1,0 +1,40 @@
+{
+  "project_info": {
+    "project_number": "126802574186",
+    "firebase_url": "https://luuk-a5d50.firebaseio.com",
+    "project_id": "luuk-a5d50",
+    "storage_bucket": "luuk-a5d50.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:126802574186:android:ce505987b0bf0d5c984313",
+        "android_client_info": {
+          "package_name": "com.luukonline.luuk"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "126802574186-mdes4k1fr3njgbg40kug23o9ei4hmia7.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyAFcOvtZhMAKosuhyeHiuzKXqOjuOLyTcI"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "126802574186-mdes4k1fr3njgbg40kug23o9ei4hmia7.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
